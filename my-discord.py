@@ -32,7 +32,6 @@ client.set_missing_host_key_policy(AutoAddPolicy())
 bot = commands.Bot(command_prefix='!')
 
 ## Events
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.errors.CheckFailure):
@@ -44,7 +43,6 @@ async def on_member_join(ctx, member):
 	await ctx.send(welcome_message)
 
 ## Commands
-
 @bot.command(name='loveme', help='Something stupid because I can')
 async def loveme(ctx):
 	response = 'I am sorry... I wasn\'t programmed to love...'
