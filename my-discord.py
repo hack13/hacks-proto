@@ -5,28 +5,27 @@
 # June 4, 2021: Adding moderation tooling for discord
 # June 14, 2021: Cleaned up and made him speak a bit less sassy
 # June 19, 2021: Switching to hide the actual important stuffs with dot_env
+# July 4, 2021: Updating the bot to support using new API service, getting rid of the SSH stuff
 
 import os
 import time 
+import json
+import requests
 from discord.ext import commands
-from paramiko import SSHClient, AutoAddPolicy
-from dotenv import dotenv_values
+# from dotenv import dotenv_values
+from dotenv import load_dotenv
 
 # Load in my environment vars
-config = dotenv_values(".env")
-known_hosts = config.ssh_knownhosts
-ssh_user = config.ssh_user
-ssh_key = config.ssh_key
-headless_manager_path = config.headless_script
-voidsbox = config.german_server
-hacksbox = config.hacks_server
-TOKEN = config.token
+load_dotenv()
+#config = dotenv_values(".env")
+known_hosts = os.getenv('ssh_knownhosts')
+hacksbox = os.getenv('hacksbox')
+api_key = os.getenv('api_key')
+neosapi = os.getenv('german_server')
+TOKEN = os.getenv('token')
 
-# Build out the SSH connection stuff
-client = SSHClient()
-client.load_system_host_keys()
-client.load_host_keys(known_hosts)
-client.set_missing_host_key_policy(AutoAddPolicy())
+# Build out the API tooling
+my_header = {'X-API-Key' : f'{api_key}'}
 
 # Set ! as the command prefix
 bot = commands.Bot(command_prefix='!')
@@ -53,6 +52,12 @@ async def bsod(ctx):
 	response = 'I run on Linux, the only thing I am scared of is a kernel panic.'
 	await ctx.send(response)
 
+@bot.command(name='testing', help='some test for json response')
+async def testing(ctx):
+	jsondata = requests.get(f'http://{hacksbox}:5000/save', headers=my_header)
+	parseit = jsondata.json()
+	await ctx.send(parseit['state'])
+
 @bot.command(name='shutup', help='some other stupid response')
 async def shutup(ctx):
 	response = 'You want me to what?! I am not going to shutup!\n *screams* AAAAAAAAAA!!!!! *screams*'
@@ -67,23 +72,15 @@ async def headlesshelp(ctx):
 @commands.has_role('Headless Manager')
 async def save(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} save')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/save', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} save')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/save', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -92,25 +89,15 @@ async def save(ctx, headless):
 @commands.has_role('Headless Manager')
 async def shutdown(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		await ctx.send('Ugh... give me a minute...')
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} shutdown')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/stop', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		await ctx.send('Ugh... give me a minute...')
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} shutdown')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/stop', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -119,25 +106,15 @@ async def shutdown(ctx, headless):
 @commands.has_role('Headless Manager')
 async def start(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		await ctx.send('Ugh... give me a minute...')
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} start')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/start', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		await ctx.send('Ugh... give me a minute...')
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} start')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/start', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -146,27 +123,15 @@ async def start(ctx, headless):
 @commands.has_role('Headless Manager')
 async def restart(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		notice = 'This will take a couple minutes, please wait for me to let you know I am done.'
-		await ctx.send(notice)
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} restart')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/restart', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		notice = 'This will take a couple minutes, please wait for me to let you know I am done.'
-		await ctx.send(notice)
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} restart')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/restart', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -175,27 +140,15 @@ async def restart(ctx, headless):
 @commands.has_role('Headless Manager')
 async def patch(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		notice = 'This will take a couple minutes, please wait for me to let you know I am done.'
-		await ctx.send(notice)
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} patch')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'{neosapi}:8880/patch', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		notice = 'This will take a couple minutes, please wait for me to let you know I am done.'
-		await ctx.send(notice)
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} patch')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/patch', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -204,27 +157,15 @@ async def patch(ctx, headless):
 @commands.has_role('Headless Manager')
 async def clearcache(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		notice = 'This will take a couple minutes, please wait for me to let you know I am done.'
-		await ctx.send(notice)
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} clearcache')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/clearcache', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		notice = 'This will take a couple minutes, please wait for me to let you know I am done.'
-		await ctx.send(notice)
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} clearcache')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/clearcache', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -233,23 +174,15 @@ async def clearcache(ctx, headless):
 @commands.has_role('Headless Manager')
 async def invite(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} invite {username}')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/invite?username={username}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} invite {username}')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/invite?username={username}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -258,23 +191,15 @@ async def invite(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def acceptfriendrequest(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} acceptfriendrequest {username}')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{neosapi}:8880/afr?username={username}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	elif headless == 'hacksheadless' or headless == 'hh':
-		client.connect(voidsbox, username=ssh_user, key_filename=ssh_key)
-		stdin, stdout, stderr = client.exec_command(f'{headless_manager_path} acceptfriendrequest {username}')
-		response = f'{stdout.read().decode("utf8")} {stderr.read().decode("utf8")}'
+		jsondata = requests.get(f'http://{hacksbox}:5000/afr?username={username}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
 		await ctx.send(response)
-		stdin.close()
-		stdout.close()
-		stderr.close()
-		client.close()
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
