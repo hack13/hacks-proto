@@ -1,23 +1,13 @@
-#!/home/neosvr/toolbox/sysinfo/bin/python
-# hack13's personal discord bot script
-# ChangeLog
-# June 3, 2021: Intial creation of the bot
-# June 4, 2021: Adding moderation tooling for discord
-# June 14, 2021: Cleaned up and made him speak a bit less sassy
-# June 19, 2021: Switching to hide the actual important stuffs with dot_env
-# July 4, 2021: Updating the bot to support using new API service, getting rid of the SSH stuff
-
+# We need to import some things
 import os
 import time 
 import json
 import requests
 from discord.ext import commands
-# from dotenv import dotenv_values
 from dotenv import load_dotenv
 
 # Load in my environment vars
 load_dotenv()
-#config = dotenv_values(".env")
 hacksbox = os.getenv('hacksbox')
 api_key = os.getenv('api_key')
 neosapi = os.getenv('german_server')
@@ -50,12 +40,6 @@ async def loveme(ctx):
 async def bsod(ctx):
 	response = 'I run on Linux, the only thing I am scared of is a kernel panic.'
 	await ctx.send(response)
-
-@bot.command(name='testing', help='some test for json response')
-async def testing(ctx):
-	jsondata = requests.get(f'http://{hacksbox}:5000/save', headers=my_header)
-	parseit = jsondata.json()
-	await ctx.send(parseit['state'])
 
 @bot.command(name='shutup', help='some other stupid response')
 async def shutup(ctx):
