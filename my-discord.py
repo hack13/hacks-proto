@@ -18,7 +18,6 @@ from dotenv import load_dotenv
 # Load in my environment vars
 load_dotenv()
 #config = dotenv_values(".env")
-known_hosts = os.getenv('ssh_knownhosts')
 hacksbox = os.getenv('hacksbox')
 api_key = os.getenv('api_key')
 neosapi = os.getenv('german_server')
@@ -78,6 +77,23 @@ async def save(ctx, headless):
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}:5000/save', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
+		await ctx.send(response)
+	else:
+		response = "I don't know that headless server..."
+		await ctx.send(response)
+
+@bot.command(name='focus', help='Used to change the focused world on headless server')
+@commands.has_role('Headless Manager')
+async def save(ctx, headless, focus):
+	if headless == 'voidsheadless' or headless == 'vh':
+		jsondata = requests.get(f'http://{neosapi}:8880/focus?world={focus}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["state"]}'
+		await ctx.send(response)
+	elif headless == 'hacksheadless' or headless == 'hh':
+		jsondata = requests.get(f'http://{hacksbox}:5000/focus?world={focus}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["state"]}'
 		await ctx.send(response)
