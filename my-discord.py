@@ -9,7 +9,6 @@ load_dotenv()
 hacksbox = os.getenv('hacksbox')
 voidsbox = os.getenv('voidsbox')
 api_key = os.getenv('api_key')
-
 TOKEN = os.getenv('token')
 
 # Build out the API tooling
