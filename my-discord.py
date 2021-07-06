@@ -50,12 +50,12 @@ async def save(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/save', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/save', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -67,12 +67,12 @@ async def save(ctx, headless, focus):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/focus?world={focus}', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/focus?world={focus}', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -84,12 +84,12 @@ async def shutdown(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/stop', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/stop', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -101,12 +101,12 @@ async def start(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/start', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/start', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -118,12 +118,12 @@ async def restart(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/restart', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/restart', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -135,12 +135,12 @@ async def patch(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/patch', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/patch', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -152,12 +152,12 @@ async def clearcache(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/clearcache', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/clearcache', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -169,12 +169,12 @@ async def invite(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/invite?username={username}', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/invite?username={username}', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -186,12 +186,12 @@ async def acceptfriendrequest(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
 		jsondata = requests.get(f'http://{voidsbox}/afr?username={username}', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		jsondata = requests.get(f'http://{hacksbox}/afr?username={username}', headers=my_header)
 		parseit = jsondata.json()
-		response = f'{parseit["state"]}'
+		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
