@@ -133,11 +133,13 @@ async def restart(ctx, headless):
 @commands.has_role('Headless Manager')
 async def patch(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
+		await ctx.send('Patching the headless, this will take a moment.')
 		jsondata = requests.get(f'http://{voidsbox}/patch', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
+		await ctx.send('Patching the headless, this will take a moment.')
 		jsondata = requests.get(f'http://{hacksbox}/patch', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
@@ -150,11 +152,13 @@ async def patch(ctx, headless):
 @commands.has_role('Headless Manager')
 async def clearcache(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
+		await ctx.send('Clearing cache of the headless, this will take a moment.')
 		jsondata = requests.get(f'http://{voidsbox}/clearcache', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
+		await ctx.send('Clearing cache of the headless, this will take a moment.')
 		jsondata = requests.get(f'http://{hacksbox}/clearcache', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
