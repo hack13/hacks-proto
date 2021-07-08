@@ -200,5 +200,22 @@ async def acceptfriendrequest(ctx, headless, username):
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
-		
+
+@bot.command(name='getmetric', help='Used to get a system metric from the headless...')
+@commands.has_role('Headless Manager')
+async def getmetric(ctx, headless, metric):
+	if headless == 'voidsheadless' or headless == 'vh':
+		jsondata = requests.get(f'http://{voidsbox}/system?metric={metric}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["name"]}: {parseit["state"]}'
+		await ctx.send(response)
+	elif headless == 'hacksheadless' or headless == 'hh':
+		jsondata = requests.get(f'http://{hacksbox}/system?metric={metric}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["name"]}: {parseit["state"]}'
+		await ctx.send(response)
+	else:
+		response = "I don't know that headless server..."
+		await ctx.send(response)
+
 bot.run(TOKEN)
