@@ -205,12 +205,12 @@ async def acceptfriendrequest(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def getmetric(ctx, headless, metric):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/system?metric={metric}', headers=my_header)
+		jsondata = requests.get(f'http://{voidsbox}/sysinfo/{metric}')
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/system?metric={metric}', headers=my_header)
+		jsondata = requests.get(f'http://{hacksbox}/sysinfo/{metric}')
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
