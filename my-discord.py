@@ -171,12 +171,12 @@ async def clearcache(ctx, headless):
 @commands.has_role('Headless Manager')
 async def invite(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/invite?username={username}', headers=my_header)
+		jsondata = requests.get(f'http://{voidsbox}/invite/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/invite?username={username}', headers=my_header)
+		jsondata = requests.get(f'http://{hacksbox}/invite/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -188,12 +188,12 @@ async def invite(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def acceptfriendrequest(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/afr?username={username}', headers=my_header)
+		jsondata = requests.get(f'http://{voidsbox}/afr/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/afr?username={username}', headers=my_header)
+		jsondata = requests.get(f'http://{hacksbox}/afr/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
