@@ -48,12 +48,12 @@ async def headlesshelp(ctx):
 @commands.has_role('Headless Manager')
 async def save(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/save', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/save', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/save', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/save', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -65,12 +65,12 @@ async def save(ctx, headless):
 @commands.has_role('Headless Manager')
 async def save(ctx, headless, focus):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/focus?world={focus}', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/focus?world={focus}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/focus?world={focus}', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/focus?world={focus}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -82,12 +82,12 @@ async def save(ctx, headless, focus):
 @commands.has_role('Headless Manager')
 async def shutdown(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/stop', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/stop', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/stop', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/stop', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -99,12 +99,12 @@ async def shutdown(ctx, headless):
 @commands.has_role('Headless Manager')
 async def start(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/start', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/start', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/start', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/start', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -116,12 +116,12 @@ async def start(ctx, headless):
 @commands.has_role('Headless Manager')
 async def restart(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/restart', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/restart', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/restart', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/restart', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -134,13 +134,13 @@ async def restart(ctx, headless):
 async def patch(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		await ctx.send('Patching the headless, this will take a moment.')
-		jsondata = requests.get(f'http://{voidsbox}/patch', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/patch', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		await ctx.send('Patching the headless, this will take a moment.')
-		jsondata = requests.get(f'http://{hacksbox}/patch', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/patch', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -153,13 +153,13 @@ async def patch(ctx, headless):
 async def clearcache(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
 		await ctx.send('Clearing cache of the headless, this will take a moment.')
-		jsondata = requests.get(f'http://{voidsbox}/clearcache', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/clearcache', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
 		await ctx.send('Clearing cache of the headless, this will take a moment.')
-		jsondata = requests.get(f'http://{hacksbox}/clearcache', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/clearcache', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -171,12 +171,12 @@ async def clearcache(ctx, headless):
 @commands.has_role('Headless Manager')
 async def invite(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/invite/{username}', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/invite/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/invite/{username}', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/invite/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -188,12 +188,12 @@ async def invite(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def acceptfriendrequest(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/afr/{username}', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/afr/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/afr/{username}', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/afr/{username}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
@@ -205,12 +205,12 @@ async def acceptfriendrequest(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def getmetric(ctx, headless, metric):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'http://{voidsbox}/sysinfo/{metric}')
+		jsondata = requests.get(f'https://{voidsbox}/sysinfo/{metric}')
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'http://{hacksbox}/sysinfo/{metric}')
+		jsondata = requests.get(f'https://{hacksbox}/sysinfo/{metric}')
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
