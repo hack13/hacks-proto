@@ -65,12 +65,12 @@ async def save(ctx, headless):
 @commands.has_role('Headless Manager')
 async def save(ctx, headless, focus):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/focus?world={focus}', headers=my_header)
+		jsondata = requests.get(f'https://{voidsbox}/focus/{focus}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/focus?world={focus}', headers=my_header)
+		jsondata = requests.get(f'https://{hacksbox}/focus/{focus}', headers=my_header)
 		parseit = jsondata.json()
 		response = f'{parseit["name"]}: {parseit["state"]}'
 		await ctx.send(response)
