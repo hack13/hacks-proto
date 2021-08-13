@@ -8,11 +8,27 @@ from dotenv import load_dotenv
 load_dotenv()
 hacksbox = os.getenv('hacksbox')
 voidsbox = os.getenv('voidsbox')
+daddiesbox = os.getenv('daddiesbox')
 api_key = os.getenv('api_key')
 TOKEN = os.getenv('token')
 
 # Build out the API tooling
 my_header = {'X-API-Key' : f'{api_key}'}
+
+# Function to reduce repeating code
+async def headlesscall(headless, action, opts):
+	if opts == "none":
+		jsondata = requests.get(f'https://{headless}/{action}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["name"]}: {parseit["state"]}'
+		return(response)
+	elif opts != "none":
+		jsondata = requests.get(f'https://{headless}/{action}/{opts}', headers=my_header)
+		parseit = jsondata.json()
+		response = f'{parseit["name"]}: {parseit["state"]}'
+		return(response)
+	else:
+		return('An Error Occurred')
 
 # Set ! as the command prefix
 bot = commands.Bot(command_prefix='!')
@@ -48,14 +64,13 @@ async def headlesshelp(ctx):
 @commands.has_role('Headless Manager')
 async def save(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/save', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'save', 'none')
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/save', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'save', 'none')
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'save', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -65,14 +80,13 @@ async def save(ctx, headless):
 @commands.has_role('Headless Manager')
 async def save(ctx, headless, focus):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/focus/{focus}', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'focus', focus)
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/focus/{focus}', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'focus', focus)
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'focus', focus)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -82,14 +96,13 @@ async def save(ctx, headless, focus):
 @commands.has_role('Headless Manager')
 async def shutdown(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/stop', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'shutdown', 'none')
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/stop', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'shutdown', 'none')
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'shutdown', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -99,14 +112,13 @@ async def shutdown(ctx, headless):
 @commands.has_role('Headless Manager')
 async def start(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/start', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'start', 'none')
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/start', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'start', 'none')
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'start', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -116,14 +128,13 @@ async def start(ctx, headless):
 @commands.has_role('Headless Manager')
 async def restart(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/restart', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'restart', 'none')
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/restart', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'restart', 'none')
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'restart', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -133,16 +144,13 @@ async def restart(ctx, headless):
 @commands.has_role('Headless Manager')
 async def patch(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		await ctx.send('Patching the headless, this will take a moment.')
-		jsondata = requests.get(f'https://{voidsbox}/patch', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'patch', 'none')
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		await ctx.send('Patching the headless, this will take a moment.')
-		jsondata = requests.get(f'https://{hacksbox}/patch', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'patch', 'none')
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'patch', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -152,16 +160,13 @@ async def patch(ctx, headless):
 @commands.has_role('Headless Manager')
 async def clearcache(ctx, headless):
 	if headless == 'voidsheadless' or headless == 'vh':
-		await ctx.send('Clearing cache of the headless, this will take a moment.')
-		jsondata = requests.get(f'https://{voidsbox}/clearcache', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'clearcache', 'none')
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		await ctx.send('Clearing cache of the headless, this will take a moment.')
-		jsondata = requests.get(f'https://{hacksbox}/clearcache', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'clearcache', 'none')
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'clearcache', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -171,14 +176,13 @@ async def clearcache(ctx, headless):
 @commands.has_role('Headless Manager')
 async def invite(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/invite/{username}', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'invite', username)
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/invite/{username}', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'invite', username)
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'invite', username)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -188,14 +192,13 @@ async def invite(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def acceptfriendrequest(ctx, headless, username):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/afr/{username}', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'afr', username)
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/afr/{username}', headers=my_header)
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'afr', username)
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'afr', username)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -205,14 +208,13 @@ async def acceptfriendrequest(ctx, headless, username):
 @commands.has_role('Headless Manager')
 async def getmetric(ctx, headless, metric):
 	if headless == 'voidsheadless' or headless == 'vh':
-		jsondata = requests.get(f'https://{voidsbox}/sysinfo/{metric}')
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(voidsbox, 'sysinfo', metric)
 		await ctx.send(response)
 	elif headless == 'hacksheadless' or headless == 'hh':
-		jsondata = requests.get(f'https://{hacksbox}/sysinfo/{metric}')
-		parseit = jsondata.json()
-		response = f'{parseit["name"]}: {parseit["state"]}'
+		response = headlesscall(hacksbox, 'sysinfo', metric)
+		await ctx.send(response)
+	elif headless == 'daddiesheadless' or headless == 'dh':
+		response = headlesscall(daddiesbox, 'sysinfo', metric)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
