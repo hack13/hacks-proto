@@ -16,7 +16,7 @@ TOKEN = os.getenv('token')
 my_header = {'X-API-Key' : f'{api_key}'}
 
 # Function to reduce repeating code
-async def headlesscall(headless, action, opts):
+def headlesscall(headless, action, opts):
 	if opts == "none":
 		jsondata = requests.get(f'https://{headless}/{action}', headers=my_header)
 		parseit = jsondata.json()
