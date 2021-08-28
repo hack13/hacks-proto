@@ -73,7 +73,7 @@ async def save(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'save', 'none')
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'save', 'none')
 		await ctx.send(response)
 	else:
@@ -92,7 +92,7 @@ async def save(ctx, headless, focus):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'focus', focus)
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'focus', focus)
 		await ctx.send(response)
 	else:
@@ -111,7 +111,7 @@ async def shutdown(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'shutdown', 'none')
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'shutdown', 'none')
 		await ctx.send(response)
 	else:
@@ -130,7 +130,7 @@ async def start(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'start', 'none')
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'start', 'none')
 		await ctx.send(response)
 	else:
@@ -149,7 +149,7 @@ async def restart(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'restart', 'none')
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'restart', 'none')
 		await ctx.send(response)
 	else:
@@ -168,7 +168,7 @@ async def patch(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'patch', 'none')
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'patch', 'none')
 		await ctx.send(response)
 	else:
@@ -187,7 +187,7 @@ async def clearcache(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'clearcache', 'none')
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'clearcache', 'none')
 		await ctx.send(response)
 	else:
@@ -206,7 +206,7 @@ async def invite(ctx, headless, username):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'invite', username)
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'invite', username)
 		await ctx.send(response)
 	else:
@@ -225,7 +225,7 @@ async def acceptfriendrequest(ctx, headless, username):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'afr', username)
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'afr', username)
 		await ctx.send(response)
 	else:
@@ -244,7 +244,7 @@ async def getmetric(ctx, headless, metric):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'sysinfo', metric)
 		await ctx.send(response)
-  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
 		response = headlesscall(voidlinux, 'sysinfo', metric)
 		await ctx.send(response)
 	else:
