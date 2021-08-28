@@ -9,6 +9,7 @@ load_dotenv()
 hacksbox = os.getenv('hacksbox')
 voidsbox = os.getenv('voidsbox')
 daddiesbox = os.getenv('daddiesbox')
+voidlinux = os.getenv('voidlinux')
 api_key = os.getenv('api_key')
 TOKEN = os.getenv('token')
 
@@ -72,6 +73,9 @@ async def save(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'save', 'none')
 		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'save', 'none')
+		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -87,6 +91,9 @@ async def save(ctx, headless, focus):
 		await ctx.send(response)
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'focus', focus)
+		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'focus', focus)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -104,6 +111,9 @@ async def shutdown(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'shutdown', 'none')
 		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'shutdown', 'none')
+		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -119,6 +129,9 @@ async def start(ctx, headless):
 		await ctx.send(response)
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'start', 'none')
+		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'start', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -136,6 +149,9 @@ async def restart(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'restart', 'none')
 		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'restart', 'none')
+		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -151,6 +167,9 @@ async def patch(ctx, headless):
 		await ctx.send(response)
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'patch', 'none')
+		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'patch', 'none')
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -168,6 +187,9 @@ async def clearcache(ctx, headless):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'clearcache', 'none')
 		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'clearcache', 'none')
+		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -183,6 +205,9 @@ async def invite(ctx, headless, username):
 		await ctx.send(response)
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'invite', username)
+		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'invite', username)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
@@ -200,6 +225,9 @@ async def acceptfriendrequest(ctx, headless, username):
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'afr', username)
 		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'afr', username)
+		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
 		await ctx.send(response)
@@ -215,6 +243,9 @@ async def getmetric(ctx, headless, metric):
 		await ctx.send(response)
 	elif headless == 'daddiesheadless' or headless == 'dh':
 		response = headlesscall(daddiesbox, 'sysinfo', metric)
+		await ctx.send(response)
+  	elif headless == 'voidsheadlesslinux' or headless == 'vhl':
+		response = headlesscall(voidlinux, 'sysinfo', metric)
 		await ctx.send(response)
 	else:
 		response = "I don't know that headless server..."
